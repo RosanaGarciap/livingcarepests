@@ -5,7 +5,7 @@ const doc = {
         title: 'Animals API',
         description: 'Animals manager API',
     },
-    host: 'mongodb-contacts-crud.onrender.com',
+    host: 'livingcarepests.onrender.com',
     schemes: ['https', 'http'],
 definitions: {
         Animal: {
