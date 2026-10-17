@@ -1,0 +1,46 @@
+[
+    {
+        "name":"Charming",
+        "species":"Dog",
+        "breed_primary":"American Staffordshire Terrier",
+        "age": 2,
+        "sex":"Male",
+        "accessed":"2019-09-20"
+    },
+
+    {
+        "name":"Chichi",
+        "species":"Dog",
+        "breed_primary":"Chihuahua",
+        "age": 5,
+        "sex":"Female",
+        "accessed":"2025-05-20"
+    },
+
+    {
+        "name":"Buster",
+        "species":"Dog",
+        "breed_primary":"Terrier",
+        "age": 2,
+        "sex":"Male",
+        "accessed":"2019-09-20"
+    },
+
+    {
+        "name":"Doggy",
+        "species":"Dog",
+        "breed_primary":"Labrador Retriever",
+        "age": 2,
+        "sex":"Male",
+        "accessed":"2019-09-20"
+    },
+
+        {
+        "name":"Kaila",
+        "species":"Dog",
+        "breed_primary":"Siberian Husky",
+        "age": 7,
+        "sex":"female",
+        "accessed":"2024-11-10"
+    }
+]
