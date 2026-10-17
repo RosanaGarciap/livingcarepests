@@ -7,7 +7,7 @@ const swaggerDocument = require('./swagger.json');
 const express = require('express');
 const app = express();
 
-const connectDB = require('./db/connection'); //load  the external connection
+const connectDB = require('./db_set/connection'); //load  the external connection
 
 
 //Connects with DB 
@@ -20,7 +20,7 @@ app.use(express.json({extended : false}));
 const port = process.env.PORT || 3000;
 
 //Connect with routes folder
-app.use('/contacts', require('./routes/contacts'));
+app.use('/animals', require('./routes/index'));
 //Home page
 app.get('/', (req,res) =>{
     res.send("Livingcare pet's webservices dev server");
