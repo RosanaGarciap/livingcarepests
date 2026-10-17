@@ -2,9 +2,10 @@
   "name": "livingcarepests",
   "version": "1.0.0",
   "description": "A webpage for animal's shelters.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon server.js",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
