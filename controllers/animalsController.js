@@ -18,6 +18,9 @@ const animalSchema = new mongoose.Schema({
     age:{
         type: Number
     },
+    sex:{
+        type: String
+    },
     accessed:{
         type: Date
     }
