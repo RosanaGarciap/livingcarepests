@@ -60,6 +60,7 @@ exports.createAnimal = async (req,res) => {
             species: req.body.species,
             breed_primary: req.body.breed_primary,
             age: req.body.age,
+            sex: req.body.sex,
             accessed: req.body.accessed
         });
         const savedAnimal = await newAnimal.save();
@@ -80,6 +81,7 @@ exports.updateAnimal = async (req,res) => {
             species: req.body.species,
             breed_primary: req.body.breed_primary,
             age: req.body.age,
+            sex: req.body.sex,
             accessed: req.body.accessed
         };
 
