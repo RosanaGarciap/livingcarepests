@@ -6,7 +6,8 @@ const swaggerDocument = require('./swagger.json');
 
 const express = require('express');
 const app = express();
-
+const cors = require('cors'); // 1. Importa cors
+app.use(cors());
 const connectDB = require('./db_set/connection'); //load  the external connection
 
 
