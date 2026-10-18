@@ -55,6 +55,9 @@
                 "age": {
                   "example": "any"
                 },
+                "sex": {
+                  "example": "any"
+                },
                 "accessed": {
                   "example": "any"
                 }
@@ -120,6 +123,9 @@
                   "example": "any"
                 },
                 "age": {
+                  "example": "any"
+                },
+                "sex": {
                   "example": "any"
                 },
                 "accessed": {

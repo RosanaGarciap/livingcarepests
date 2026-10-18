@@ -1,0 +1,108 @@
+### Obtener todos los contactos
+GET http://localhost:3000/animals
+
+### ---
+
+### Obtener un contacto por ID (Reemplaza el ID de ejemplo por uno real de tu base de datos)
+GET http://localhost:3000/animals?id=6ac108bb87fc73a4a483e876
+
+### Root path
+GET http://localhost:3000/
+
+### TEST contact 4: Ana López
+POST http://localhost:3000/animals
+Content-Type: application/json
+
+{
+        "name":"Charming",
+        "species":"Dog",
+        "breed_primary":"American Staffordshire Terrier",
+        "age": 2,
+        "sex":"Male",
+        "accessed":"2019-09-20"
+}
+
+### TEST contact 5: Luis Rodríguez
+POST http://localhost:3000/animals
+Content-Type: application/json
+
+{
+  "name":"Doggy",
+  "species":"Dog",
+  "breed_primary":"Labrador Retriever",
+  "age": 2,
+  "sex":"Male",
+  "accessed":"2019-09-20"
+}
+
+### ==========================================
+### PRUEBA DE PUT (Actualizar contacto)
+### Retorna estatus 204 (No Content)
+### ==========================================
+PUT http://localhost:3000/animals/6ad2353c4acd7a281a1e5c7c
+Content-Type: application/json
+
+{
+  "name":"Kaila",
+  "species":"Dog",
+  "breed_primary":"Siberian Husky",
+  "age": 7,
+  "sex":"female",
+  "accessed":"2024-11-10"
+}
+
+### ==========================================
+### PRUEBA DE DELETE (Eliminar contacto)
+### Retorna estatus 200 (OK)
+### ==========================================
+DELETE http://localhost:3000/animals/6ac108bb87fc73a4a483e876
+
+### Obtener todos los contactos
+GET https://livingcarepests.onrender.com/animals
+
+### ==========================================
+### POST 2. RENDER TEST (Production)
+### ==========================================
+POST https://livingcarepests.onrender.com/animals
+Content-Type: application/json
+
+{
+    "name":"Doggy",
+    "species":"Dog",
+    "breed_primary":"Labrador Retriever",
+    "age": 2,
+    "sex":"Male",
+    "accessed":"2019-09-20"
+}
+
+### ==========================================
+### PUT 2 RENDER TEST (production)
+### Returns status 404 (No found)
+### ==========================================
+PUT https://livingcarepests.onrender.com/animals/6ad2353c4acd7a281a1e5c7a
+Content-Type: application/json
+
+{
+        "name":"Buster",
+        "species":"Dog",
+        "breed_primary":"Terrier",
+        "age": 2,
+        "sex":"Male",
+        "accessed":"2019-09-20"
+}
+
+### ==========================================
+### DELETE 3 RENDER TEST (production)
+### Returns status 204 (No content)
+### ==========================================
+DELETE https://livingcarepests.onrender.com/animals/6ad2353c4acd7a281a1e5c7a
+Content-Type: application/json
+
+{
+    "firstName": "Juan Pablo",
+    "lastName": "Pérez",
+    "email": "juanp.perez@example.com",
+    "favoriteColor": "Rojo",
+    "birthday": "1995-01-15"
+}
+
