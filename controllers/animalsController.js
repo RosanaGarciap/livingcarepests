@@ -1,3 +1,8 @@
+// ES Modules
+import Joi from 'joi';
+// CommonJS
+const Joi = require('joi');
+
 const mongoose = require('mongoose');
 
 //Schema with required information fields
@@ -26,6 +31,25 @@ const animalSchema = new mongoose.Schema({
     }
 });
 
+// 2. Scheme JOI (Estructura de la solicitud HTTP)
+//This declaration  is used to validate the data sent in the request body when creating or updating an animal. 
+// It ensures that the required fields are present and meet the specified criteria before proceeding with database oparations. 
+// If the validation fails, an error response is sent back to the client, preventing invalid data from being stored in the database.
+
+// This also is considered a POST validation.
+const registerValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().required(),
+        species: Joi.string().min(2).required(),
+        breed_primary: Joi.string().min(6).required(),
+        age: Joi.number().optional(),
+        sex: Joi.string().optional(),
+        accessed: Joi.date().default(Date.now).required()
+    });
+    return schema.validate(data);
+};
+
+// JOI and MONGOOSE Models
 const Animal = mongoose.models.Animal || mongoose.model('Animal', animalSchema,'animals');
 
 //GET: Request all animals or one by ID
@@ -40,8 +64,20 @@ exports.getAnimals = async (req, res) => {
     }
 }
 
+
+const idValidation = (id) => {
+    const schema = Joi.string().hex().length(24).required();
+    return schema.validate(id);
+};
+
+
 exports.getAnimalById = async (req,res) =>{
     try {
+        const { error } = idValidation(req.params.id);
+        if (error) {
+            return res.status(400).json({error: 'Invalid ID format'});
+        }
+
         //if URL contains id parameter then
         const animal = await Animal.findById(req.params.id);
         if (!animal) {
@@ -54,20 +90,28 @@ exports.getAnimalById = async (req,res) =>{
     }
 }
 
+
 //POST: Create NEW Animal
 
 exports.createAnimal = async (req,res) => {
     try {
+
+        //VALIDATION WITH JOI
+        const { error,value } = registerValidation(req.body);
+        if (error) {
+            return res.status(400).json({error: error.details[0].message});
+        }
+
+        //
         const newAnimal = new Animal({
-            name: req.body.name,
-            species: req.body.species,
-            breed_primary: req.body.breed_primary,
-            age: req.body.age,
-            sex: req.body.sex,
-            accessed: req.body.accessed
+            name: value.name,
+            species: value.species,
+            breed_primary: value.breed_primary,
+            age: value.age,
+            sex: value.sex,
+            accessed: value.accessed
         });
         const savedAnimal = await newAnimal.save();
-
         // returns ID and code 201 for new record added
         return res.status(201).json({id:savedAnimal._id});
     } catch (error){
@@ -79,13 +123,25 @@ exports.createAnimal = async (req,res) => {
 exports.updateAnimal = async (req,res) => {
     try {
         const animalId = req.params.id;
+
+        const idCheck = idValidation(animalId);
+
+        if(idCheck.error){
+            return res.status(400).json({error: 'Invalid ID format'});
+        }
+
+        const { error, value } = updateValidation(req.body);
+        if (error) {
+            return res.status(400).json({error: error.details[0].message});
+        }
+
         const updateData = {
-            name: req.body.name,
-            species: req.body.species,
-            breed_primary: req.body.breed_primary,
-            age: req.body.age,
-            sex: req.body.sex,
-            accessed: req.body.accessed
+            name: value.name,
+            species: value.species,
+            breed_primary: value.breed_primary,
+            age: value.age,
+            sex: value.sex,
+            accessed: value.accessed
         };
 
         const result = await Animal.findByIdAndUpdate(animalId, updateData);
@@ -100,14 +156,32 @@ exports.updateAnimal = async (req,res) => {
     }
 };
 
+//UPDATE VALIDATION
+const updateValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().min(1),
+        species: Joi.string().min(2),
+        breed_primary: Joi.string().min(6),
+        age: Joi.number().optional(),
+        sex: Joi.string().optional(),
+        accessed: Joi.date().default(Date.now)
+    }).min(1); // At least one field must be provided.
+    return schema.validate(data);
+}
+
 //DELETE: Delete a animal with ID
 exports.deleteAnimal = async (req,res)=>{
     try {
        const animalId = req.params.id;
+       const {error} = idValidation(animalId);
+       if (error) {
+        return res.status(400).json({error: 'Invalid ID format'});
+       }
+
        const result = await Animal.findByIdAndDelete(animalId);
        
        if (!result) {
-        return res.status(404).json({error: "Animal not found"})
+        return res.status(404).json({error: "The Animal selected is not in the record"})
        }
     return res.status(200).json({error: "Animal deleted successfully"})
 

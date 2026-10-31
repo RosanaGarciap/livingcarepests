@@ -67,12 +67,12 @@ POST https://livingcarepests.onrender.com/animals
 Content-Type: application/json
 
 {
-    "name":"Doggy",
-    "species":"Dog",
-    "breed_primary":"Labrador Retriever",
-    "age": 2,
+    "name":"Michu",
+    "species":"cat",
+    "breed_primary":"Persian",
+    "age": 1,
     "sex":"Male",
-    "accessed":"2019-09-20"
+    "accessed":"2026-09-20"
 }
 
 ### ==========================================
@@ -88,7 +88,7 @@ Content-Type: application/json
         "breed_primary":"Terrier",
         "age": 2,
         "sex":"Male",
-        "accessed":"2019-09-20"
+        "accessed":"2022-09-20"
 }
 
 ### ==========================================

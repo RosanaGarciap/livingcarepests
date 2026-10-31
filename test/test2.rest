@@ -1,0 +1,75 @@
+@baseUrl = http://localhost:3000/api
+# Cambia '/api' o la ruta base según cómo tengas configurado tu servidor en Express (ej: http://localhost:3000)
+
+### ==========================================
+### PRUEBAS PARA EL MÉTODO POST (Crear Animal)
+### ==========================================
+
+### 1. CASO EXITOSO (POST)
+# Todos los campos requeridos correctos y opcionales válidos
+POST {{baseUrl}}/animals
+Content-Type: application/json
+
+{
+  "name": "Firulais",
+  "species": "Canino",
+  "breed_primary": "Golden Retriever",
+  "age": 3,
+  "sex": "Macho"
+}
+
+### 2. CASO FALLIDO - Falta campo obligatorio (POST)
+# Debe fallar porque 'species' y 'breed_primary' son requeridos y además 'species' tiene min(6)
+POST {{baseUrl}}/animals
+Content-Type: application/json
+
+{
+  "name": "Pelusa",
+  "species": "Gato", 
+  "sex": "Hembra"
+}
+
+### 3. CASO FALLIDO - Longitud mínima no cumplida (POST)
+# 'species' y 'breed_primary' exigen un mínimo de 6 caracteres (.min(6))
+POST {{baseUrl}}/animals
+Content-Type: application/json
+
+{
+  "name": "Max",
+  "species": "Perro",
+  "breed_primary": "Dogo",
+  "age": 2
+}
+
+
+### ==========================================
+### PRUEBAS PARA EL MÉTODO PUT (Actualizar Animal)
+### ==========================================
+# (Reemplaza el ID de abajo por un ID real que exista en tu base de datos o uno válido de 24 caracteres hex)
+@animalId = 65d412345678901234567890
+
+### 4. CASO EXITOSO (PUT)
+# Envía solo un campo o varios (gracias a .min(1) y campos opcionales)
+PUT {{baseUrl}}/animals/{{animalId}}
+Content-Type: application/json
+
+{
+  "age": 4,
+  "sex": "Macho Castrado"
+}
+
+### 5. CASO FALLIDO - ID inválido en la URL (PUT)
+# El ID no tiene el formato correcto de MongoDB (24 caracteres hex)
+PUT {{baseUrl}}/animals/id-falso-123
+Content-Type: application/json
+
+{
+  "age": 5
+}
+
+### 6. CASO FALLIDO - Body vacío en el PUT (PUT)
+# Como configuraste .min(1), si mandan un objeto vacío Joi debe rechazarlo
+PUT {{baseUrl}}/animals/{{animalId}}
+Content-Type: application/json
+
+{}
