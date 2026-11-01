@@ -4,10 +4,10 @@
   "description": "A webpage for animal's shelters.",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
-    "swagger": "node swaggerautogen.js",
+    "start": "node server.js",
     "dev": "nodemon server.js",
-    "start": "node swaggerautogen.js && node server.js"
+    "swagger": "node swaggerautogen.js",
+    "seed": "node seed/seed.js"
   },
   "repository": {
     "type": "git",

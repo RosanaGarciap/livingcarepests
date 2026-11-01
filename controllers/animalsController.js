@@ -1,6 +1,3 @@
-// ES Modules
-import Joi from 'joi';
-// CommonJS
 const Joi = require('joi');
 
 const mongoose = require('mongoose');

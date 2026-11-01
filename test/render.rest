@@ -1,0 +1,109 @@
+### ============================================
+### LIVINGCARE PETS - RENDER (PRODUCTION) TESTS
+### Requires the "REST Client" extension in VS Code
+### Note: on Render's free plan the first request can take
+### up to ~50 seconds while the service wakes up.
+### ============================================
+
+@baseUrl = https://livingcarepests.onrender.com
+@contentType = application/json
+
+### --------------------------------------------
+### HOME
+### --------------------------------------------
+GET {{baseUrl}}/
+
+### --------------------------------------------
+### GET all animals
+### --------------------------------------------
+GET {{baseUrl}}/animals
+
+### --------------------------------------------
+### POST - create animal (expected: 201 + id)
+### --------------------------------------------
+# @name createAnimal
+POST {{baseUrl}}/animals
+Content-Type: {{contentType}}
+
+{
+  "name": "Charming",
+  "species": "Dog",
+  "breed_primary": "American Staffordshire Terrier",
+  "age": 2,
+  "sex": "Male",
+  "accessed": "2019-09-20"
+}
+
+### Saves the id returned by the POST above
+@animalId = {{createAnimal.response.body.id}}
+
+### --------------------------------------------
+### GET animal by ID (expected: 200)
+### --------------------------------------------
+GET {{baseUrl}}/animals/{{animalId}}
+
+### --------------------------------------------
+### PUT - update animal (expected: 204)
+### --------------------------------------------
+PUT {{baseUrl}}/animals/{{animalId}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Charming Updated",
+  "age": 3
+}
+
+### --------------------------------------------
+### DELETE animal (expected: 200)
+### --------------------------------------------
+DELETE {{baseUrl}}/animals/{{animalId}}
+
+
+### ============================================
+### ERROR CASES
+### ============================================
+
+### POST - missing required fields (expected: 400)
+POST {{baseUrl}}/animals
+Content-Type: {{contentType}}
+
+{
+  "name": "NoSpecies"
+}
+
+### POST - breed_primary too short, min 6 (expected: 400)
+POST {{baseUrl}}/animals
+Content-Type: {{contentType}}
+
+{
+  "name": "Rex",
+  "species": "Dog",
+  "breed_primary": "Lab",
+  "accessed": "2024-01-15"
+}
+
+### GET - invalid ID format (expected: 400)
+GET {{baseUrl}}/animals/123
+
+### GET - valid format but non-existent ID (expected: 404)
+GET {{baseUrl}}/animals/000000000000000000000000
+
+### PUT - empty body (expected: 400)
+PUT {{baseUrl}}/animals/{{animalId}}
+Content-Type: {{contentType}}
+
+{}
+
+### PUT - non-existent ID (expected: 404)
+PUT {{baseUrl}}/animals/000000000000000000000000
+Content-Type: {{contentType}}
+
+{
+  "name": "Ghost"
+}
+
+### DELETE - invalid ID format (expected: 400)
+DELETE {{baseUrl}}/animals/abc
+
+### DELETE - non-existent ID (expected: 404)
+DELETE {{baseUrl}}/animals/000000000000000000000000
