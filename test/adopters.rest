@@ -1,0 +1,66 @@
+### ============================================
+### ADOPTERS TESTS
+### Switch baseUrl between localhost and Render
+### ============================================
+
+# @baseUrl = http://localhost:3000
+@baseUrl = https://livingcarepests.onrender.com
+@contentType = application/json
+### GET all adopters
+GET {{baseUrl}}/adopters
+### POST - create adopter (expected: 201 + id)
+# @name createAdopter
+POST {{baseUrl}}/adopters
+Content-Type: {{contentType}}
+Page 17
+Livingcare Pets - Backend source code
+{
+  "first_name": "Maria",
+  "last_name": "Lopez",
+  "email": "maria.lopez@example.com",
+  "phone": "555-1234",
+  "address": "123 Main St",
+  "city": "Lisbon"
+}
+### Saves the id returned by the POST above
+@adopterId = {{createAdopter.response.body.id}}
+### GET adopter by ID (expected: 200)
+GET {{baseUrl}}/adopters/{{adopterId}}
+### PUT - update adopter (expected: 204)
+PUT {{baseUrl}}/adopters/{{adopterId}}
+Content-Type: {{contentType}}
+{
+}
+  "phone": "555-9999",
+  "city": "Porto"
+### DELETE adopter (expected: 200)
+DELETE {{baseUrl}}/adopters/{{adopterId}}
+### ============================================
+### ERROR CASES
+### ============================================
+### POST - missing required fields (expected: 400)
+POST {{baseUrl}}/adopters
+Content-Type: {{contentType}}
+{
+}
+  "first_name": "NoEmail"
+### POST - invalid email (expected: 400)
+POST {{baseUrl}}/adopters
+Content-Type: {{contentType}}
+{
+}
+  "first_name": "Maria",
+  "last_name": "Lopez",
+  "email": "not-an-email"
+### POST - duplicate email (run the first POST twice, expected: 409)
+POST {{baseUrl}}/adopters
+Content-Type: {{contentType}}
+{
+}
+  "first_name": "Maria",
+  "last_name": "Lopez",
+  "email": "maria.lopez@example.com"
+### GET - invalid ID format (expected: 400)
+GET {{baseUrl}}/adopters/123
+### GET - non-existent ID (expected: 404)
+GET {{baseUrl}}/adopters/00000000000000000000000

@@ -39,9 +39,9 @@ const registerValidation = (data) => {
         name: Joi.string().required(),
         species: Joi.string().min(2).required(),
         breed_primary: Joi.string().min(6).required(),
-        age: Joi.number().optional(),
-        sex: Joi.string().optional(),
-        accessed: Joi.date().default(Date.now).required()
+        age: Joi.number().allow(null).default(null),
+        sex: Joi.string().valid('Female', 'Male').uppercase().required(),
+        accessed: Joi.date().default(Date.now)
     });
     return schema.validate(data);
 };
@@ -141,7 +141,7 @@ exports.updateAnimal = async (req,res) => {
             accessed: value.accessed
         };
 
-        const result = await Animal.findByIdAndUpdate(animalId, updateData);
+        const result = await Animal.findByIdAndUpdate(animalId, updateData, { new: true, runValidators: true });
         if (!result) {
             return res.status(404).json({error: 'Animal not found'});
         }
@@ -156,12 +156,12 @@ exports.updateAnimal = async (req,res) => {
 //UPDATE VALIDATION
 const updateValidation = (data) => {
     const schema = Joi.object({
-        name: Joi.string().min(1),
-        species: Joi.string().min(2),
-        breed_primary: Joi.string().min(6),
-        age: Joi.number().optional(),
-        sex: Joi.string().optional(),
-        accessed: Joi.date().default(Date.now)
+        name: Joi.string().min(1).optional(),
+        species: Joi.string().min(2).optional(),
+        breed_primary: Joi.string().min(6).optional(),
+        age: Joi.number().allow(null).optional(),
+        sex: Joi.string().valid('Female', 'Male').uppercase().optional(),
+        accessed: Joi.date().optional()
     }).min(1); // At least one field must be provided.
     return schema.validate(data);
 }
