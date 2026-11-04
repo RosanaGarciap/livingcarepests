@@ -40,7 +40,7 @@ const registerValidation = (data) => {
         species: Joi.string().min(2).required(),
         breed_primary: Joi.string().min(6).required(),
         age: Joi.number().allow(null).default(null),
-        sex: Joi.string().valid('Female', 'Male').uppercase().required(),
+        sex: Joi.string().valid('Female', 'Male', 'female', 'male').uppercase().required(),
         accessed: Joi.date().default(Date.now)
     });
     return schema.validate(data);
