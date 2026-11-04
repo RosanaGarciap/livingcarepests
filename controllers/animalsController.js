@@ -160,7 +160,7 @@ const updateValidation = (data) => {
         species: Joi.string().min(2).optional(),
         breed_primary: Joi.string().min(6).optional(),
         age: Joi.number().allow(null).optional(),
-        sex: Joi.string().valid('Female', 'Male').uppercase().optional(),
+        sex: Joi.string().valid('Female', 'Male', 'female', 'male').optional(),
         accessed: Joi.date().optional()
     }).min(1); // At least one field must be provided.
     return schema.validate(data);
