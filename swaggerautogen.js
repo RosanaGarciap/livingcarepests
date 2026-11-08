@@ -7,14 +7,23 @@ const doc = {
     },
     host: 'livingcarepests.onrender.com',
     schemes: ['https', 'http'],
-definitions: {
+    securityDefinitions: {
+        bearerAuth: {
+            type: 'apiKey',
+            in: 'header',
+            name: 'Authorization',
+            description: 'Escribe: Bearer TU_TOKEN'
+        }
+    },
+    security: [{ bearerAuth: [] }],
+    definitions: {
         Animal: {
-            name:"Charming",
-            species:"Dog",
-            breed_primary:"American Staffordshire Terrier",
+            name: "Charming",
+            species: "Dog",
+            breed_primary: "American Staffordshire Terrier",
             age: 2,
-            sex:"Male",
-            accessed:"2019-09-20"
+            sex: "Male",
+            accessed: "2019-09-20"
         }
     }
 };
