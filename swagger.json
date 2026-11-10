@@ -163,6 +163,33 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "species": {
+                  "example": "any"
+                },
+                "breed_primary": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "sex": {
+                  "example": "any"
+                },
+                "accessed": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

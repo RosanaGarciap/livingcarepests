@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Livingcare Pets</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="/js/inlang.js" defer></script>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="#home" aria-label="Livingcare Pets, home">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#2a7ab8"/><g fill="#fff"><ellipse cx="20" cy="25" rx="7" ry="5.5"/><ellipse cx="11" cy="17" rx="3" ry="4"/><ellipse cx="17" cy="12" rx="3" ry="4"/><ellipse cx="23" cy="12" rx="3" ry="4"/><ellipse cx="29" cy="17" rx="3" ry="4"/></g></svg>
+    <span>Livingcare Pets</span>
+  </a>
+  <div class="right">
+  <nav aria-label="Main">
+    <a class="nav-item" href="#home" aria-current="page" aria-label="Home">
+      <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>
+      <span class="tip" data-i18n="nav_home">Home</span>
+    </a>
+    <a class="nav-item" href="#catalog" aria-label="Catalog">
+      <svg viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></svg>
+      <span class="tip" data-i18n="nav_catalog">Catalog</span>
+    </a>
+    <a class="nav-item" href="#contact" aria-label="Contact Us">
+      <svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.7 4.3-2.1 1.4a11 11 0 0 0 5.9 5.9l1.4-2.1L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4Z"/></svg>
+      <span class="tip" data-i18n="nav_contact">Contact Us</span>
+    </a>
+  </nav>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="es" aria-pressed="false">ES</button>
+  </div>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <h1 data-i18n="h1">Close-by care for every pet</h1>
+    <p data-i18n="hero_p">Find care centers, products and adoption events in one place.</p>
+    <a class="pill" href="#catalog" data-i18n="hero_cta">Browse the catalog</a>
+  </section>
+
+  <section class="cards" id="catalog">
+    <article class="card blue">
+      <div class="art">
+        <svg viewBox="0 0 260 300" role="img" aria-label="Location pin with a paw print" data-i18n-label="pin_alt">
+          <circle cx="130" cy="130" r="105" fill="#5cd1c4"/>
+          <ellipse cx="130" cy="262" rx="105" ry="24" fill="#f3efdc" stroke="#d9d3b8"/>
+          <path d="M60 255l70-34 70 34-70 22z" fill="#a8d28b" opacity=".7"/>
+          <path d="M130 40c-32 0-56 24-56 54 0 40 56 112 56 112s56-72 56-112c0-30-24-54-56-54z" fill="#ef5d57"/>
+          <circle cx="130" cy="94" r="36" fill="#fff"/>
+          <g fill="#ef5d57"><ellipse cx="130" cy="104" rx="12" ry="9.5"/><ellipse cx="111" cy="92" rx="5" ry="6.5"/><ellipse cx="124" cy="80" rx="5" ry="6.5"/><ellipse cx="137" cy="80" rx="5" ry="6.5"/><ellipse cx="149" cy="92" rx="5" ry="6.5"/></g>
+          <circle cx="205" cy="52" r="26" fill="#fff" stroke="#ef5d57" stroke-width="3"/>
+          <path d="M193 58l12-12 12 12v10h-24z" fill="#f6b73c"/><rect x="201" y="60" width="8" height="8" fill="#2a7ab8"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <h2 data-i18n="c1_h">Find your nearest pet care center</h2>
+        <p data-i18n="c1_p">Vets, groomers and daycares near you, with hours and available services.</p>
+        <a class="btn" href="#contact" data-i18n="c1_btn">Find centers</a>
+      </div>
+    </article>
+
+    <article class="card green">
+      <div class="art">
+        <svg viewBox="0 0 260 320" role="img" aria-label="Sitting white cat with gray patches" data-i18n-label="cat_alt">
+          <ellipse cx="130" cy="305" rx="78" ry="9" fill="#000" opacity=".08"/>
+          <!-- cola -->
+          <path d="M196 270c42-6 52-52 26-84-10-12-24-4-16 8 14 20 8 46-14 54z" fill="#fff" stroke="#d6dbe0" stroke-width="2"/>
+          <path d="M222 190c-6-6-14-4-12 4 4 6 10 10 14 8z" fill="#8a929c"/>
+          <!-- cuerpo -->
+          <path d="M70 300c-14-60-8-120 30-146h60c38 26 44 86 30 146z" fill="#fff" stroke="#d6dbe0" stroke-width="2"/>
+          <path d="M92 205c-10 20-8 44 0 70 10-6 16-30 12-54z" fill="#8a929c"/>
+          <!-- patas -->
+          <ellipse cx="108" cy="298" rx="22" ry="11" fill="#fff" stroke="#d6dbe0" stroke-width="2"/>
+          <ellipse cx="152" cy="298" rx="22" ry="11" fill="#fff" stroke="#d6dbe0" stroke-width="2"/>
+          <path d="M118 210v70M142 210v70" stroke="#e5e8ec" stroke-width="2" stroke-linecap="round"/>
+          <!-- orejas -->
+          <path d="M72 80 70 22l46 30z" fill="#fff" stroke="#d6dbe0" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M188 80l2-58-46 30z" fill="#fff" stroke="#d6dbe0" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M78 66 77 40l22 14z" fill="#f4b6bd"/>
+          <path d="M182 66l1-26-22 14z" fill="#f4b6bd"/>
+          <!-- cabeza -->
+          <ellipse cx="130" cy="112" rx="68" ry="58" fill="#fff" stroke="#d6dbe0" stroke-width="2"/>
+          <path d="M62 100c8-30 34-46 56-44-10 12-14 30-10 52-16 6-34 2-46-8z" fill="#8a929c"/>
+          <path d="M180 70c10 6 18 16 18 30-8 4-16 4-24 0 2-12 2-22 6-30z" fill="#8a929c" opacity=".85"/>
+          <!-- cara -->
+          <ellipse cx="102" cy="112" rx="9" ry="11" fill="#1f2937"/>
+          <ellipse cx="158" cy="112" rx="9" ry="11" fill="#1f2937"/>
+          <circle cx="105" cy="108" r="3.2" fill="#fff"/><circle cx="161" cy="108" r="3.2" fill="#fff"/>
+          <path d="M122 128h16l-8 9z" fill="#f08fa0"/>
+          <path d="M130 137v7M130 144c-5 6-13 6-17 1M130 144c5 6 13 6 17 1" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+          <path d="M84 134 52 128M84 142 54 148M176 134l32-6M176 142l30 6" stroke="#9ca3af" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="txt">
+        <h2 data-i18n="c2_h">Events &amp; Adoption Specials</h2>
+        <p data-i18n="c2_p">Explore upcoming adoption days and pet activities in your area.</p>
+        <a class="btn" href="#contact" data-i18n="c2_btn">See all events</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="follow" id="contact">
+    <h2 data-i18n="f_h">Follow Livingcare Pets!</h2>
+    <p data-i18n="f_p">Care tips, adoption stories and news every week.</p>
+  </section>
+</main>
+
+</body>
+</html>

@@ -133,12 +133,12 @@ exports.updateAnimal = async (req,res) => {
         }
 
         const updateData = {
-            name: value.name,
-            species: value.species,
-            breed_primary: value.breed_primary,
-            age: value.age,
-            sex: value.sex,
-            accessed: value.accessed
+            name: req.body.name,
+            species: req.body.species,
+            breed_primary: req.body.breed_primary,
+            age: req.body.age,
+            sex: req.body.sex,
+            accessed: req.body.accessed
         };
 
         const result = await Animal.findByIdAndUpdate(animalId, updateData, { new: true, runValidators: true });
