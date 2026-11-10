@@ -101,12 +101,12 @@ exports.createAnimal = async (req,res) => {
 
         //
         const newAnimal = new Animal({
-            name: value.name,
-            species: value.species,
-            breed_primary: value.breed_primary,
-            age: value.age,
-            sex: value.sex,
-            accessed: value.accessed
+            name: req.body.name,
+            species: req.body.species,
+            breed_primary: req.body.breed_primary,
+            age: req.body.age,
+            sex: req.body.sex,
+            accessed: req.body.accessed
         });
         const savedAnimal = await newAnimal.save();
         // returns ID and code 201 for new record added
