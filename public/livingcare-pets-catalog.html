@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Livingcare Pets – Catalog</title>
+<link href="./css/styles.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/" aria-label="Livingcare Pets">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#2a7ab8"/><g fill="#fff"><ellipse cx="20" cy="25" rx="7" ry="5.5"/><ellipse cx="11" cy="17" rx="3" ry="4"/><ellipse cx="17" cy="12" rx="3" ry="4"/><ellipse cx="23" cy="12" rx="3" ry="4"/><ellipse cx="29" cy="17" rx="3" ry="4"/></g></svg>
+    <span>Livingcare Pets</span>
+  </a>
+  <div class="right">
+    <nav aria-label="Main">
+      <a class="nav-item" href="./index.html" aria-label="Home">
+        <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>
+        <span class="tip" data-i18n="nav_home">Home</span>
+      </a>
+      <a class="nav-item" href="./livingcare-pets-catalog.html" aria-current="page">
+        <svg viewBox="0 0 24 24"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></svg>
+        <span class="tip" data-i18n="nav_catalog">Catalog</span>
+      </a>
+      <a class="nav-item" href="./contact.html" aria-label="Contact Us">
+        <svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.7 4.3-2.1 1.4a11 11 0 0 0 5.9 5.9l1.4-2.1L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4Z"/></svg>
+        <span class="tip" data-i18n="nav_contact">Contact Us</span>
+      </a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <h1 data-i18n="h1">Meet our Friends</h1>
+    <p data-i18n="sub">Every pet below is waiting for a home. Tap the paw to start an adoption.</p>
+    <input class="search" id="q" type="search" data-i18n-ph="search" placeholder="Search by name, species or breed" autocomplete="off">
+  </section>
+
+  <section class="list" aria-live="polite">
+    <div class="meta"><span id="count"></span></div>
+    <table>
+      <thead><tr>
+        <th data-i18n="c_name">Name</th><th data-i18n="c_species">Species</th><th data-i18n="c_breed">Breed</th>
+        <th data-i18n="c_age">Age (yrs)</th><th data-i18n="c_sex">Sex</th><th data-i18n="c_status">Status</th><th class="act" data-i18n="c_adopt">Adopt</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="state" id="state"></div>
+    <p class="demo" id="demo" hidden data-i18n="demo">Showing sample data: /api/animals was not reachable.</p>
+  </section>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var API='/api/animals'; // GET -> getAnimals in animalsController.js
+  var SAMPLE=[
+    {_id:'1',name:'Misu',species:'Cat',breed_primary:'Domestic Shorthair',age:2,sex:'Female',adoption_status:'available'},
+    {_id:'2',name:'Firulais',species:'Dog',breed_primary:'Labrador',age:3,sex:'Male',adoption_status:'available'},
+    {_id:'3',name:'Copito',species:'Rabbit',breed_primary:'Holland Lop',age:1,sex:'Male',adoption_status:'in_process'},
+    {_id:'4',name:'Luna',species:'Cat',breed_primary:'Siamese Mix',age:4,sex:'Female',adoption_status:'adopted'},
+    {_id:'5',name:'Rocky',species:'Dog',breed_primary:'Border Collie',age:5,sex:'Male',adoption_status:'available'},
+    {_id:'6',name:'Nube',species:'Cat',breed_primary:'Persian Mix',age:null,sex:'Female',adoption_status:'in_process'}
+  ];
+  var T={
+    en:{nav_home:'Home',nav_catalog:'Catalog',nav_contact:'Contact Us',h1:'Meet our Friends',sub:'Every pet below is waiting for a home. Tap the paw to start an adoption.',search:'Search by name, species or breed',c_name:'Name',c_species:'Species',c_breed:'Breed',c_age:'Age (yrs)',c_sex:'Sex',c_status:'Status',c_adopt:'Adopt',available:'Available',in_process:'In process',adopted:'Adopted',female:'Female',male:'Male',na:'Not available for adoption',adopt_btn:'Adopt',loading:'Loading Friends…',empty:'No Friends found.',count:'{n} Friends',toast:'Adoption request started for {n}',demo:'Showing sample data: /api/animals was not reachable.'},
+    es:{nav_home:'Inicio',nav_catalog:'Catálogo',nav_contact:'Contáctanos',h1:'Conoce a nuestros Amigos',sub:'Cada mascota de la lista espera un hogar. Toca la patita para iniciar una adopción.',search:'Buscar por nombre, especie o raza',c_name:'Nombre',c_species:'Especie',c_breed:'Raza',c_age:'Edad (años)',c_sex:'Sexo',c_status:'Estado',c_adopt:'Adoptar',available:'Disponible',in_process:'En proceso',adopted:'Adoptado',female:'Hembra',male:'Macho',na:'No disponible para adopción',adopt_btn:'Adoptar',loading:'Cargando Amigos…',empty:'No se encontraron Amigos.',count:'{n} Amigos',toast:'Solicitud de adopción iniciada para {n}',demo:'Mostrando datos de ejemplo: no se pudo acceder a /api/animals.'}
+  };
+  var lang='en',data=[],loading=true,query='';
+  var $=function(s){return document.querySelector(s)};
+  var PAW='<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="16" rx="5.5" ry="4.5"/><ellipse cx="5" cy="11" rx="2.2" ry="3"/><ellipse cx="9.5" cy="6.5" rx="2.2" ry="3"/><ellipse cx="14.5" cy="6.5" rx="2.2" ry="3"/><ellipse cx="19" cy="11" rx="2.2" ry="3"/>';
+  var LOCK='<circle cx="19" cy="19" r="5" fill="var(--line)" stroke="none"/><rect x="16.6" y="18.6" width="4.8" height="3.6" rx=".8" fill="currentColor" stroke="none"/><path class="lock" d="M17.6 18.6v-1.2a1.4 1.4 0 0 1 2.8 0v1.2"/>';
+  function t(k){return T[lang][k]}
+  function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+  function cell(key,content,cls){var td=el('td',cls);td.setAttribute('data-label',t(key));if(content&&content.nodeType)td.appendChild(content);else td.textContent=content;return td}
+  function toast(m){var x=$('#toast');x.textContent=m;x.classList.add('show');clearTimeout(toast.id);toast.id=setTimeout(function(){x.classList.remove('show')},2600)}
+  // Hook: replace with your real adoption request (e.g. POST /api/adoptions)
+  function adopt(a){toast(t('toast').replace('{n}',a.name))}
+
+  function pawCell(a,status){
+    var wrap=el('span','wrap'),btn=el('button','paw'),blocked=status!=='available';
+    btn.type='button';
+    btn.setAttribute('aria-label',blocked?t('na'):t('adopt_btn')+' '+a.name);
+    btn.innerHTML=PAW+(blocked?LOCK:'')+'</svg>';
+    if(blocked){
+      btn.disabled=true;
+      wrap.tabIndex=0;
+      wrap.appendChild(btn);
+      wrap.appendChild(el('span','tip',t('na')));
+    }else{
+      btn.addEventListener('click',function(){adopt(a)});
+      wrap.appendChild(btn);
+    }
+    return wrap;
+  }
+
+  function render(){
+    var q=query.trim().toLowerCase(),rows=$('#rows');
+    rows.textContent='';
+    var list=data.filter(function(a){return !q||[a.name,a.species,a.breed_primary].join(' ').toLowerCase().indexOf(q)>-1});
+    list.forEach(function(a){
+      var status=a.adoption_status||'available',sex=String(a.sex||'').toLowerCase(),tr=el('tr');
+      tr.appendChild(cell('c_name',a.name,'name'));
+      tr.appendChild(cell('c_species',a.species));
+      tr.appendChild(cell('c_breed',a.breed_primary));
+      tr.appendChild(cell('c_age',a.age==null?'—':String(a.age)));
+      tr.appendChild(cell('c_sex',t(sex)||a.sex||'—'));
+      tr.appendChild(cell('c_status',el('span','badge '+status,t(status)||status)));
+      tr.appendChild(cell('c_adopt',pawCell(a,status),'act'));
+      rows.appendChild(tr);
+    });
+    $('#state').textContent=loading?t('loading'):(list.length?'':t('empty'));
+    $('#count').textContent=loading?'':t('count').replace('{n}',list.length);
+  }
+
+  function apply(l){
+    lang=l;document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(e){e.textContent=t(e.getAttribute('data-i18n'))});
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(e){e.placeholder=t(e.getAttribute('data-i18n-ph'))});
+    document.querySelectorAll('.nav-item').forEach(function(a){a.setAttribute('aria-label',a.querySelector('.tip').textContent)});
+    document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===l))});
+    render();
+  }
+
+  var saved='en';
+  try{saved=localStorage.getItem('lcp-lang')||'en'}catch(e){}
+  apply(T[saved]?saved:'en');
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click',function(){apply(b.dataset.lang);try{localStorage.setItem('lcp-lang',b.dataset.lang)}catch(e){}});
+  });
+  $('#q').addEventListener('input',function(e){query=e.target.value;render()});
+
+  fetch(API,{headers:{Accept:'application/json'}})
+    .then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(function(d){if(!Array.isArray(d))throw 0;data=d})
+    .catch(function(){data=SAMPLE;$('#demo').hidden=false})
+    .then(function(){loading=false;render()});
+})();
+</script>
+</body>
+</html>

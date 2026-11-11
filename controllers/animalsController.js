@@ -25,6 +25,11 @@ const animalSchema = new mongoose.Schema({
     },
     accessed:{
         type: Date
+    },
+    adoption_status: {
+        type: String,
+        enum: ['available', 'in_process', 'adopted'],
+        default: 'available'
     }
 });
 
@@ -41,7 +46,8 @@ const registerValidation = (data) => {
         breed_primary: Joi.string().min(6).required(),
         age: Joi.number().allow(null).default(null),
         sex: Joi.string().valid('Female', 'Male', 'female', 'male').required(),
-        accessed: Joi.date().default(Date.now)
+        accessed: Joi.date().default(Date.now),
+        adoption_status: Joi.string().valid('available', 'in_process', 'adopted').default('available')
     });
     return schema.validate(data);
 };
@@ -158,7 +164,8 @@ exports.createAnimal = async (req,res) => {
             breed_primary: value.breed_primary,
             age: value.age,
             sex: value.sex,
-            accessed: value.accessed
+            accessed: value.accessed,
+            adoption_status: value.adoption_status
         });
         const savedAnimal = await newAnimal.save();
         // returns ID and code 201 for new record added
@@ -190,7 +197,8 @@ exports.updateAnimal = async (req,res) => {
             breed_primary: req.body.breed_primary,
             age: req.body.age,
             sex: req.body.sex,
-            accessed: req.body.accessed
+            accessed: req.body.accessed,
+            adoption_status: req.body.adoption_status
         };
 
         const result = await Animal.findByIdAndUpdate(animalId, updateData, { new: true, runValidators: true });
@@ -213,7 +221,8 @@ const updateValidation = (data) => {
         breed_primary: Joi.string().min(6).optional(),
         age: Joi.number().allow(null).optional(),
         sex: Joi.string().valid('Female', 'Male', 'female', 'male').optional(),
-        accessed: Joi.date().optional()
+        accessed: Joi.date().optional(),
+        adoption_status: Joi.string().valid('available', 'in_process', 'adopted').optional()
     }).min(1); // At least one field must be provided.
     return schema.validate(data);
 }

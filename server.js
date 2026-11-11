@@ -1,5 +1,6 @@
 require('dotenv').config(); // Reading env variables must be the first thing to do
 const express = require('express');
+const path = require('path');     
 const cors = require('cors');
 const auth = require('./middleware/auth');
 const swaggerUi = require('swagger-ui-express');
@@ -12,10 +13,10 @@ connectDB();
 app.use(cors());
 // Receives JSON data
 app.use(express.json());
-// Home page
-app.get('/', (req, res) => {
-    res.send("Livingcare pet's webservices dev server");
-});
+
+// NEW HOME: (public/index.html en "/", public/catalog.html en "/catalog")
+app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+
 // Show Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Connect with routes folder
