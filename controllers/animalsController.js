@@ -90,6 +90,58 @@ exports.getAnimalById = async (req,res) =>{
 
 //POST: Create NEW Animal
 
+
+/**
+ * @swagger
+ * /api/animals:
+ *   post:
+ *     summary: Create a new animal
+ *     tags: [Animals]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - species
+ *               - breed_primary
+ *               - age
+ *               - sex
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Firulais
+ *               species:
+ *                 type: string
+ *                 example: Dog
+ *               breed_primary:
+ *                 type: string
+ *                 example: Labrador
+ *               age:
+ *                 type: integer
+ *                 example: 3
+ *               sex:
+ *                 type: string
+ *                 example: Male
+ *               accessed:
+ *                 type: boolean
+ *                 example: false
+ *     responses:
+ *       201:
+ *         description: Animal created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   example: 64f1c2a9b3e4a1d2c3b4a5f6
+ *       400:
+ *         description: Validation error
+ */
 exports.createAnimal = async (req,res) => {
     try {
 
@@ -101,12 +153,12 @@ exports.createAnimal = async (req,res) => {
 
         //
         const newAnimal = new Animal({
-            name: req.body.name,
-            species: req.body.species,
-            breed_primary: req.body.breed_primary,
-            age: req.body.age,
-            sex: req.body.sex,
-            accessed: req.body.accessed
+            name: value.name,
+            species: value.species,
+            breed_primary: value.breed_primary,
+            age: value.age,
+            sex: value.sex,
+            accessed: value.accessed
         });
         const savedAnimal = await newAnimal.save();
         // returns ID and code 201 for new record added
